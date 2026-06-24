@@ -23,6 +23,7 @@ import {
   Headphones,
   TrendingDown
 } from 'lucide-react'
+import SearchResults from './components/SearchResults'
 
 // Beautiful Mock Products / Deals in Egypt with Store prices & Price History
 const MOCK_DEALS = [
@@ -166,6 +167,7 @@ const GithubIcon = ({ className }) => (
 
 export default function App() {
   const searchInputRef = useRef(null);
+  const [showSearchPage, setShowSearchPage] = useState(true);
   // Theme Manager State
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('theme');
@@ -229,6 +231,20 @@ export default function App() {
       setNewsletterEmail('');
     }, 1200);
   };
+
+  if (showSearchPage) {
+    return (
+      <div className="relative">
+        <button 
+          onClick={() => setShowSearchPage(false)}
+          className="fixed bottom-6 right-6 z-50 py-3 px-6 bg-text-primary text-background rounded-full font-bold shadow-2xl hover:scale-105 transition-transform"
+        >
+          View Landing Page
+        </button>
+        <SearchResults />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background text-text-primary font-sans transition-colors duration-300 relative selection:bg-primary/20 selection:text-primary">
