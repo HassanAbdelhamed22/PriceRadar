@@ -234,7 +234,7 @@ function DealCard({ deal, navigate, getCategoryIcon }) {
             className={`p-3 rounded-xl border text-[11px] flex items-start space-x-2.5 cursor-pointer ${deal.aiStatus === 'warning' ? 'bg-warning/5 border-warning/20 text-warning-800' : 'bg-success/5 border-success/20 text-success-800'}`}
           >
             <Brain className="w-4.5 h-4.5 text-current shrink-0 mt-0.5" />
-            <div>
+            <div className="min-w-0">
               <span className="font-bold uppercase text-[9px] tracking-wider block">AI Verdict</span>
               <span className="font-semibold leading-normal">{deal.aiVerdict}</span>
             </div>
@@ -492,7 +492,7 @@ export default function DealsPage({ theme, toggleTheme }) {
                     {/* AI Verdict snippet box */}
                     <div className={`p-3 rounded-xl border text-[11px] flex items-start space-x-2 ${deal.aiStatus === 'warning' ? 'bg-warning/5 border-warning/20 text-warning-800' : 'bg-success/5 border-success/20 text-success-800'}`}>
                       <Brain className="w-4.5 h-4.5 text-current shrink-0 mt-0.5" />
-                      <div>
+                      <div className="min-w-0">
                         <span className="font-bold uppercase text-[9px] tracking-wider block">AI Verdict</span>
                         <span className="font-medium">{deal.aiVerdict}</span>
                       </div>

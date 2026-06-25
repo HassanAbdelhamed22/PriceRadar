@@ -656,7 +656,7 @@ export default function LandingPage({ theme, toggleTheme }) {
                       deal.aiStatus === 'warning' ? 'bg-warning/5 border-warning/20' : 'bg-success/5 border-success/20'
                     }`}>
                       <Brain className="w-5 h-5 text-current shrink-0 mt-0.5" />
-                      <div>
+                      <div className="min-w-0">
                         <p className="font-bold uppercase text-[9px] tracking-wider text-muted">AI Verdict</p>
                         <p className={`font-medium mt-0.5 ${deal.aiStatus === 'warning' ? 'text-warning' : 'text-success'}`}>{deal.aiVerdict}</p>
                       </div>

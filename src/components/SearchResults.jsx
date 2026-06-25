@@ -813,7 +813,7 @@ export default function SearchResults({ theme, toggleTheme }) {
                         {/* Store badge */}
                         <div className="flex items-center justify-between p-2.5 bg-surface/50 rounded-xl border border-border">
                           <div className="flex items-center space-x-2">
-                            <span className="bg-white dark:bg-black px-1.5 py-0.5 rounded text-[10px] font-extrabold text-text-primary border border-border">
+                            <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-surface border border-border/80 text-text-secondary select-none">
                               {product.cheapestStoreLogo}
                             </span>
                             <span className="text-xs font-semibold">{product.cheapestStore}</span>
@@ -825,7 +825,7 @@ export default function SearchResults({ theme, toggleTheme }) {
 
                         {/* AI verdict + trend */}
                         <div className="flex items-center space-x-2 text-xs">
-                          <div className={`flex-1 flex items-center space-x-1.5 p-2 rounded-lg border ${
+                          <div className={`flex-1 min-w-0 flex items-center space-x-1.5 p-2 rounded-lg border ${
                             product.aiStatus === 'success'
                               ? 'bg-success/5 border-success/20 text-success'
                               : 'bg-warning/5 border-warning/20 text-warning'
