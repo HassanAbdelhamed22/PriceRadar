@@ -755,7 +755,7 @@ export default function SearchResults({ theme, toggleTheme }) {
 
         {/* ── PRODUCTS GRID ─────────────────────────────── */}
         {resultsVisible && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredProducts.slice(0, visibleCount).map((product, index) => {
               const isSelected  = selectedCompare.some(p => p.id === product.id);
 
@@ -884,7 +884,7 @@ export default function SearchResults({ theme, toggleTheme }) {
         {resultsVisible && filteredProducts.length > visibleCount && (
           <div className="mt-12 flex flex-col items-center">
             {isPaginationLoading ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 w-full">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
                 {[...Array(5)].map((_, i) => (
                   <div key={i} className="bg-card/45 border border-border/50 rounded-2xl h-[450px] p-6 space-y-4">
                     <div className="h-40 shimmer-loader rounded-xl" />
