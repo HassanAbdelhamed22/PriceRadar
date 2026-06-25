@@ -24,7 +24,8 @@
   --color-hero-background: rgba(249, 115, 22, 0.03);
   --color-navbar: rgba(252, 250, 249, 0.65);
   --color-footer: #faf7f5;
-  --shadow-custom: 0 12px 30px -10px rgba(234, 88, 12, 0.06), 0 1px 3px rgba(0, 0, 0, 0.01);
+  --shadow-custom:
+    0 12px 30px -10px rgba(234, 88, 12, 0.06), 0 1px 3px rgba(0, 0, 0, 0.01);
 }
 
 :root[data-theme="dark"] {
@@ -48,7 +49,8 @@
   --color-hero-background: rgba(249, 115, 22, 0.06);
   --color-navbar: rgba(9, 7, 15, 0.55);
   --color-footer: #050407;
-  --shadow-custom: 0 20px 45px -15px rgba(0, 0, 0, 0.55), 0 1px 2px rgba(255, 255, 255, 0.01);
+  --shadow-custom:
+    0 20px 45px -15px rgba(0, 0, 0, 0.55), 0 1px 2px rgba(255, 255, 255, 0.01);
 }
 
 @theme {
@@ -119,7 +121,8 @@
   }
 
   @keyframes float {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0px) rotate(0deg);
     }
     50% {
@@ -135,6 +138,275 @@
       background-position: 40px 40px;
     }
   }
+
+  /* ── AI Workflow Keyframes ── */
+  @keyframes terminal-cursor {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes scan-line {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(400%);
+    }
+  }
+
+  @keyframes neural-pulse {
+    0%,
+    100% {
+      opacity: 0.25;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.4);
+    }
+  }
+
+  @keyframes log-enter {
+    from {
+      opacity: 0;
+      transform: translateX(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-up-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(36px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes glow-cheapest {
+    0%,
+    100% {
+      box-shadow:
+        0 0 0 0 rgba(16, 185, 129, 0),
+        var(--shadow-custom);
+    }
+    50% {
+      box-shadow:
+        0 0 28px 6px rgba(16, 185, 129, 0.22),
+        var(--shadow-custom);
+    }
+  }
+
+  @keyframes shimmer-sweep {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(200%);
+    }
+  }
+
+  @keyframes float-particle {
+    0% {
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateY(-70px) translateX(25px) scale(0);
+      opacity: 0;
+    }
+  }
+
+  @keyframes float-particle-reverse {
+    0% {
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateY(-55px) translateX(-30px) scale(0);
+      opacity: 0;
+    }
+  }
+
+  @keyframes search-collapse {
+    from {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+      filter: blur(0px);
+    }
+    to {
+      transform: scale(0.94) translateY(-18px);
+      opacity: 0;
+      filter: blur(4px);
+    }
+  }
+
+  @keyframes workflow-appear {
+    from {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes bar-grow {
+    from {
+      width: 0%;
+    }
+    to {
+      width: var(--target-width, 100%);
+    }
+  }
+
+  @keyframes ripple-out {
+    from {
+      transform: scale(0);
+      opacity: 0.45;
+    }
+    to {
+      transform: scale(3);
+      opacity: 0;
+    }
+  }
+
+  @keyframes success-ring {
+    0% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    60% {
+      transform: scale(1.15);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+
+  @keyframes prediction-bar {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes check-draw {
+    from {
+      stroke-dashoffset: 24;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes placeholder-out {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+  }
+
+  @keyframes placeholder-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes border-glow {
+    0%,
+    100% {
+      border-color: rgba(249, 115, 22, 0.2);
+    }
+    50% {
+      border-color: rgba(249, 115, 22, 0.6);
+    }
+  }
+
+  @keyframes counter-appear {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes draw-svg-path {
+    from {
+      stroke-dashoffset: 2000;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes tilt-in {
+    from {
+      opacity: 0;
+      transform: perspective(800px) rotateX(8deg) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: perspective(800px) rotateX(0deg) translateY(0px);
+    }
+  }
+
+  @keyframes search-icon-morph {
+    0%,
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
+    50% {
+      transform: scale(1.15) rotate(-15deg);
+    }
+  }
+
+  @keyframes number-count {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 }
 
 /* ----------------------------------------------------
@@ -145,7 +417,9 @@ html {
   scroll-behavior: smooth;
   background-color: var(--color-background);
   color: var(--color-text-secondary);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 body {
@@ -169,7 +443,12 @@ body {
 }
 
 /* Premium Typography Rules */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--color-text-primary);
   font-family: var(--font-display);
 }
@@ -201,9 +480,10 @@ h1, h2, h3, h4, h5, h6 {
   display: block; /* Show in light mode */
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.35);
-  box-shadow: inset 3px 3px 8px rgba(255, 255, 255, 0.5),
-              inset -3px -3px 8px rgba(0, 0, 0, 0.02),
-              0 10px 20px rgba(0, 0, 0, 0.03);
+  box-shadow:
+    inset 3px 3px 8px rgba(255, 255, 255, 0.5),
+    inset -3px -3px 8px rgba(0, 0, 0, 0.02),
+    0 10px 20px rgba(0, 0, 0, 0.03);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
 }
@@ -211,26 +491,32 @@ h1, h2, h3, h4, h5, h6 {
 /* Custom Grid background patterns for premium Linear/Vercel feel */
 .grid-overlay {
   background-size: 40px 40px;
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(128, 128, 128, 0.05) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(128, 128, 128, 0.05) 1px, transparent 1px);
 }
 :root[data-theme="dark"] .grid-overlay {
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
 }
 
 /* Elegant radial gradients */
 .radial-glow {
-  background: radial-gradient(circle at 50% 50%, var(--color-primary-hover) 0%, transparent 60%);
+  background: radial-gradient(
+    circle at 50% 50%,
+    var(--color-primary-hover) 0%,
+    transparent 60%
+  );
   filter: blur(80px);
   opacity: 0.15;
 }
 
 /* Custom animations helper triggers */
 .hover-lift {
-  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.3s ease;
 }
 .hover-lift:hover {
   transform: translateY(-4px) scale(1.01);
@@ -239,6 +525,197 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Search bar pulsing focus ring */
 .search-glow:focus-within {
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
   border-color: var(--color-primary);
+}
+
+/* ── AI Workflow Utility Classes ── */
+
+/* Terminal blinking cursor */
+.animate-terminal-cursor {
+  animation: terminal-cursor 1s step-end infinite;
+}
+
+/* Scan line sweeping across store cards */
+.animate-scan-line {
+  animation: scan-line 1.6s linear infinite;
+}
+
+/* Neural network node pulse */
+.animate-neural-pulse {
+  animation: neural-pulse 2s ease-in-out infinite;
+}
+
+/* Terminal log line entrance */
+.animate-log-enter {
+  animation: log-enter 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Results card stagger reveal */
+.animate-slide-up-reveal {
+  opacity: 0;
+  animation: slide-up-reveal 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Cheapest product card persistent glow */
+.animate-glow-cheapest {
+  animation: glow-cheapest 2.4s ease-in-out infinite;
+}
+
+/* Shimmer loading effect on skeleton elements */
+.shimmer-loader {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+.shimmer-loader::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    transparent 100%
+  );
+  animation: shimmer-sweep 1.8s ease-in-out infinite;
+}
+:root[data-theme="dark"] .shimmer-loader::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 100%
+  );
+}
+
+/* Search bar collapse on submit */
+.animate-search-collapse {
+  animation: search-collapse 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* AI workflow panel entrance */
+.animate-workflow-appear {
+  animation: workflow-appear 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Floating particles in AI phase */
+.animate-float-particle {
+  animation: float-particle 2.2s ease-out forwards;
+}
+.animate-float-particle-rev {
+  animation: float-particle-reverse 2.5s ease-out forwards;
+}
+
+button {
+  cursor: pointer !important;
+}
+
+/* Gradient button shimmer on hover */
+.btn-gradient-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.btn-gradient-shimmer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+}
+.btn-gradient-shimmer:hover::before {
+  left: 150%;
+}
+
+/* 3D card tilt on hover */
+.hover-tilt {
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.35s ease;
+  transform-style: preserve-3d;
+}
+.hover-tilt:hover {
+  transform: perspective(900px) rotateX(2deg) rotateY(-3deg) translateY(-3px);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.2);
+}
+
+/* Ripple on button click */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+.btn-ripple .ripple-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+  transform: scale(0);
+  animation: ripple-out 0.6s ease-out forwards;
+}
+
+/* Animated border glow on search focus */
+.search-focus-glow {
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+.search-focus-glow:focus-within {
+  box-shadow:
+    0 0 0 3px rgba(249, 115, 22, 0.18),
+    0 8px 32px rgba(249, 115, 22, 0.08);
+  border-color: var(--color-primary) !important;
+}
+
+/* Price counter reveal */
+.animate-counter-appear {
+  animation: counter-appear 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* SVG price chart draw animation */
+.animate-draw-path {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: draw-svg-path 1.2s ease-out forwards;
+}
+
+/* Smooth section entrance on scroll */
+.section-fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+.section-fade-in.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animated border glow for AI cards */
+.animate-border-glow {
+  animation: border-glow 2s ease-in-out infinite;
+}
+
+/* Prediction progress bar animation */
+.animate-prediction-bar {
+  animation: prediction-bar 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Tilt-in entrance for analysis cards */
+.animate-tilt-in {
+  animation: tilt-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Spin slow for loading indicators */
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
 }
