@@ -778,7 +778,7 @@ export default function SearchResults({ theme, toggleTheme }) {
                         decoding="async"
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                      <div className="absolute top-3 right-3 bg-white/90 backdrop-blur text-xs font-bold px-2 py-1 rounded-lg text-text-primary shadow-sm flex items-center space-x-1">
+                      <div className="absolute top-3 right-3 bg-white/90 backdrop-blur text-xs font-bold px-2 py-1 rounded-lg text-text-primary shadow-sm flex items-center space-x-1 dark:text-white dark:bg-black/60">
                         <Star className="w-3.5 h-3.5 text-warning fill-warning" />
                         <span>{product.rating}</span>
                       </div>
