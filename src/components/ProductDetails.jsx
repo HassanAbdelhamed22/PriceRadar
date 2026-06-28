@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import productsData from '../data/products.json';
+import ShopperProfileModal from './ShopperProfileModal';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
   Heart,
@@ -562,6 +563,31 @@ export default function ProductDetails({ theme, toggleTheme }) {
   const [isStickyVisible, setIsStickyVisible] = useState(false);
   const [chartPeriod, setChartPeriod] = useState('30d');
 
+  // Wishlist and Profile drawer state
+  const [wishlist, setWishlist] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('priceradar_wishlist') || '[]');
+    } catch {
+      return [];
+    }
+  });
+  const [showProfile, setShowProfile] = useState(false);
+  const [navbarPoints, setNavbarPoints] = useState(1250);
+
+  // Refresh points display whenever profile modal open/close updates
+  useEffect(() => {
+    const pts = localStorage.getItem('priceradar_shopper_points');
+    if (pts) setNavbarPoints(Number(pts));
+  }, [showProfile]);
+
+  const toggleWishlist = (id) => {
+    setWishlist(prev => {
+      const next = prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id];
+      localStorage.setItem('priceradar_wishlist', JSON.stringify(next));
+      return next;
+    });
+  };
+
 
 
   const [activeChartTab, setActiveChartTab] = useState('history');
@@ -646,6 +672,29 @@ export default function ProductDetails({ theme, toggleTheme }) {
 
           {/* Interactive features */}
           <div className="flex items-center space-x-3.5">
+            {/* Wishlist toggle & Drawer */}
+            <button 
+              onClick={() => setShowProfile(true)} 
+              aria-label="Wishlist drawer"
+              className="relative p-2 rounded-full hover:bg-surface text-text-secondary hover:text-text-primary transition-all duration-200 cursor-pointer border-none bg-transparent"
+            >
+              <Heart className={`w-4.5 h-4.5 ${wishlist.length > 0 ? 'fill-red-500 text-red-500' : ''}`} />
+              {wishlist.length > 0 && (
+                <span className="absolute top-0 right-0 bg-red-500 text-white text-[8px] font-black w-4.5 h-4.5 rounded-full flex items-center justify-center border border-card">
+                  {wishlist.length}
+                </span>
+              )}
+            </button>
+
+            {/* Loyalty points chip */}
+            <button 
+              onClick={() => setShowProfile(true)} 
+              className="hidden sm:inline-flex py-1.5 px-3 bg-primary/10 border border-primary/20 text-primary text-[10px] font-black rounded-full items-center gap-1 cursor-pointer"
+            >
+              <Sparkles className="w-3 h-3 text-primary animate-pulse" />
+              <span>{navbarPoints} pts</span>
+            </button>
+
             <button
               onClick={toggleTheme}
               aria-label="Toggle theme"
@@ -690,8 +739,11 @@ export default function ProductDetails({ theme, toggleTheme }) {
             <button className="w-11 h-11 flex items-center justify-center bg-card border border-border rounded-xl hover:bg-surface text-text-secondary hover:text-text-primary transition-all cursor-pointer">
               <Share2 className="w-4 h-4" />
             </button>
-            <button className="w-11 h-11 flex items-center justify-center bg-card border border-border rounded-xl hover:bg-surface text-text-secondary hover:text-danger transition-all cursor-pointer">
-              <Heart className="w-4 h-4" />
+            <button 
+              onClick={() => toggleWishlist(productData.id)}
+              className="w-11 h-11 flex items-center justify-center bg-card border border-border rounded-xl hover:bg-surface text-text-secondary transition-all cursor-pointer"
+            >
+              <Heart className={`w-4 h-4 ${wishlist.includes(productData.id) ? 'fill-red-500 text-red-500' : 'hover:text-danger text-text-secondary'}`} />
             </button>
           </div>
         </div>
@@ -1295,6 +1347,14 @@ export default function ProductDetails({ theme, toggleTheme }) {
         </div>
       )}
 
+      {/* Shopper profile drawer */}
+      <ShopperProfileModal 
+        isOpen={showProfile}
+        onClose={() => setShowProfile(false)}
+        wishlist={wishlist}
+        toggleWishlist={toggleWishlist}
+        navigate={navigate}
+      />
     </div>
   );
 }

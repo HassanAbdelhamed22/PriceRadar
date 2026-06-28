@@ -35,12 +35,6 @@ const LogoIcon = () => (
   </div>
 );
 
-const GithubIcon = ({ className }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-    <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.646.64.699 1.026 1.592 1.026 2.683 0 3.842-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.137 20.162 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
-  </svg>
-);
-
 export default function MerchantLandingPage({ theme, toggleTheme }) {
   const navigate = useNavigate();
   const pricingRef = useRef(null);
@@ -191,9 +185,6 @@ export default function MerchantLandingPage({ theme, toggleTheme }) {
           </nav>
 
           <div className="flex items-center space-x-3.5">
-            <a href="https://github.com/HassanAbdelhamed22/PriceRadar" target="_blank" rel="noreferrer" aria-label="View source on GitHub" className="p-2 rounded-full hover:bg-surface text-text-secondary hover:text-text-primary transition-all duration-200 hidden sm:inline-flex">
-              <GithubIcon className="w-4.5 h-4.5" />
-            </a>
             <button onClick={toggleTheme} aria-label="Toggle theme" className="p-2 rounded-full hover:bg-surface text-text-secondary hover:text-text-primary transition-all duration-200 cursor-pointer bg-transparent border-none">
               {theme === 'dark' ? <Sun className="w-4.5 h-4.5" /> : <Moon className="w-4.5 h-4.5" />}
             </button>
@@ -215,11 +206,6 @@ export default function MerchantLandingPage({ theme, toggleTheme }) {
             <button onClick={() => { setMobileMenuOpen(false); navigate('/categories'); }} className="text-left text-base font-semibold text-text-secondary hover:text-primary transition-colors py-1 bg-transparent border-none cursor-pointer">Categories</button>
             <button onClick={() => { setMobileMenuOpen(false); navigate('/deals'); }} className="text-left text-base font-semibold text-text-secondary hover:text-primary transition-colors py-1 bg-transparent border-none cursor-pointer">Deals</button>
             <button onClick={() => { setMobileMenuOpen(false); navigate('/merchant'); }} className="text-left text-base font-semibold text-primary transition-colors py-1 bg-transparent border-none cursor-pointer">For Retailers</button>
-            <hr className="border-border my-2" />
-            <a href="https://github.com/HassanAbdelhamed22/PriceRadar" target="_blank" rel="noreferrer" className="flex items-center space-x-2 py-2 text-text-secondary hover:text-primary">
-              <GithubIcon className="w-5 h-5" />
-              <span className="font-medium text-sm">View Source Code</span>
-            </a>
           </div>
         )}
       </header>

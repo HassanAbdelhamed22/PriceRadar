@@ -6,10 +6,12 @@ import {
   CheckCircle2, Check, Plus, Scale, Radar, Sun, Moon, Menu, Zap,
   TrendingUp as TrendUp, Target, BarChart3, ShoppingCart, Award,
   DollarSign, Percent,
-  Sparkles
+  Sparkles,
+  Heart
 } from 'lucide-react';
 
 import AISearchWorkflow from './AISearchWorkflow';
+import ShopperProfileModal from './ShopperProfileModal';
 import productsData from '../data/products.json';
 
 /* ─────────────────────────────────────────────────────────────
@@ -178,6 +180,31 @@ export default function SearchResults({ theme, toggleTheme }) {
   const [isPaginationLoading, setPagLoading]  = useState(false);
   const [selectedCompare, setSelectedCompare] = useState([]);
   const [showCompareModal, setShowCompare]    = useState(false);
+
+  // Wishlist and Profile drawer state
+  const [wishlist, setWishlist] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('priceradar_wishlist') || '[]');
+    } catch {
+      return [];
+    }
+  });
+  const [showProfile, setShowProfile] = useState(false);
+  const [navbarPoints, setNavbarPoints] = useState(1250);
+
+  // Refresh points display whenever profile modal open/close updates
+  useEffect(() => {
+    const pts = localStorage.getItem('priceradar_shopper_points');
+    if (pts) setNavbarPoints(Number(pts));
+  }, [showProfile]);
+
+  const toggleWishlist = (id) => {
+    setWishlist(prev => {
+      const next = prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id];
+      localStorage.setItem('priceradar_wishlist', JSON.stringify(next));
+      return next;
+    });
+  };
 
   const searchRef = useRef(null);
 
@@ -406,6 +433,29 @@ export default function SearchResults({ theme, toggleTheme }) {
           </nav>
 
           <div className="flex items-center space-x-3.5">
+            {/* Wishlist toggle & Drawer */}
+            <button 
+              onClick={() => setShowProfile(true)} 
+              aria-label="Wishlist drawer"
+              className="relative p-2 rounded-full hover:bg-surface text-text-secondary hover:text-text-primary transition-all duration-200 cursor-pointer border-none bg-transparent"
+            >
+              <Heart className={`w-4.5 h-4.5 ${wishlist.length > 0 ? 'fill-red-500 text-red-500' : ''}`} />
+              {wishlist.length > 0 && (
+                <span className="absolute top-0 right-0 bg-red-500 text-white text-[8px] font-black w-4.5 h-4.5 rounded-full flex items-center justify-center border border-card">
+                  {wishlist.length}
+                </span>
+              )}
+            </button>
+
+            {/* Loyalty points chip */}
+            <button 
+              onClick={() => setShowProfile(true)} 
+              className="hidden sm:inline-flex py-1.5 px-3 bg-primary/10 border border-primary/20 text-primary text-[10px] font-black rounded-full items-center gap-1 cursor-pointer"
+            >
+              <Sparkles className="w-3 h-3 text-primary animate-pulse" />
+              <span>{navbarPoints} pts</span>
+            </button>
+
             <button onClick={toggleTheme} aria-label="Toggle theme" className="p-2 rounded-full hover:bg-surface text-text-secondary hover:text-text-primary transition-all duration-200 cursor-pointer bg-transparent border-none">
               {theme === 'dark' ? <Sun className="w-4.5 h-4.5" /> : <Moon className="w-4.5 h-4.5" />}
             </button>
@@ -791,6 +841,19 @@ export default function SearchResults({ theme, toggleTheme }) {
                           <span>Featured Listing</span>
                         </div>
                       )}
+
+                      {/* Heart wishlist overlay */}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleWishlist(product.id);
+                        }}
+                        className="absolute top-3 right-14 bg-white/95 backdrop-blur text-xs font-bold p-1.5 rounded-lg text-text-primary shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer z-10 dark:text-white dark:bg-black/60"
+                      >
+                        <Heart className={`w-3.5 h-3.5 ${wishlist.includes(product.id) ? 'fill-red-500 text-red-500' : 'text-text-secondary'}`} />
+                      </button>
+
                       <img
                         src={product.image}
                         alt={product.title}
@@ -1188,6 +1251,15 @@ export default function SearchResults({ theme, toggleTheme }) {
           </div>
         </div>
       )}
+
+      {/* Shopper profile drawer */}
+      <ShopperProfileModal 
+        isOpen={showProfile}
+        onClose={() => setShowProfile(false)}
+        wishlist={wishlist}
+        toggleWishlist={toggleWishlist}
+        navigate={navigate}
+      />
     </div>
   );
 }
