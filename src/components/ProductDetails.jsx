@@ -634,6 +634,7 @@ export default function ProductDetails({ theme, toggleTheme }) {
             <button onClick={() => navigate('/')} className="text-sm font-semibold text-text-secondary hover:text-text-primary transition-colors cursor-pointer bg-transparent border-none">Home</button>
             <button onClick={() => navigate('/categories')} className="text-sm font-semibold text-text-secondary hover:text-text-primary transition-colors cursor-pointer bg-transparent border-none">Categories</button>
             <button onClick={() => navigate('/deals')} className="text-sm font-semibold text-text-secondary hover:text-text-primary transition-colors cursor-pointer bg-transparent border-none">Deals</button>
+            <button onClick={() => navigate('/merchant')} className="text-sm font-semibold text-text-secondary hover:text-text-primary transition-colors cursor-pointer bg-transparent border-none">For Retailers</button>
           </nav>
 
           {/* Interactive features */}
@@ -661,6 +662,7 @@ export default function ProductDetails({ theme, toggleTheme }) {
             <button onClick={() => { setMobileMenuOpen(false); navigate('/'); }} className="text-left font-semibold text-text-secondary hover:text-primary transition-colors h-11 flex items-center w-full bg-transparent border-none cursor-pointer">Home</button>
             <button onClick={() => { setMobileMenuOpen(false); navigate('/categories'); }} className="text-left font-semibold text-text-secondary hover:text-primary transition-colors h-11 flex items-center w-full bg-transparent border-none cursor-pointer">Categories</button>
             <button onClick={() => { setMobileMenuOpen(false); navigate('/deals'); }} className="text-left font-semibold text-text-secondary hover:text-primary transition-colors h-11 flex items-center w-full bg-transparent border-none cursor-pointer">Deals</button>
+            <button onClick={() => { setMobileMenuOpen(false); navigate('/merchant'); }} className="text-left font-semibold text-text-secondary hover:text-primary transition-colors h-11 flex items-center w-full bg-transparent border-none cursor-pointer">For Retailers</button>
           </div>
         )}
       </header>

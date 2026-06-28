@@ -392,6 +392,7 @@ export default function SearchResults({ theme, toggleTheme }) {
             <button onClick={() => navigate('/')} className="text-sm font-semibold text-text-secondary hover:text-text-primary transition-colors cursor-pointer bg-transparent border-none">Home</button>
             <button onClick={() => navigate('/categories')} className="text-sm font-semibold text-text-secondary hover:text-text-primary transition-colors cursor-pointer bg-transparent border-none">Categories</button>
             <button onClick={() => navigate('/deals')} className="text-sm font-semibold text-text-secondary hover:text-text-primary transition-colors cursor-pointer bg-transparent border-none">Deals</button>
+            <button onClick={() => navigate('/merchant')} className="text-sm font-semibold text-text-secondary hover:text-text-primary transition-colors cursor-pointer bg-transparent border-none">For Retailers</button>
           </nav>
 
           <div className="flex items-center space-x-3.5">
@@ -409,6 +410,7 @@ export default function SearchResults({ theme, toggleTheme }) {
             <button onClick={() => { setMobileMenuOpen(false); navigate('/'); }} className="text-left font-semibold text-text-secondary hover:text-primary transition-colors py-1 bg-transparent border-none">Home</button>
             <button onClick={() => { setMobileMenuOpen(false); navigate('/categories'); }} className="text-left font-semibold text-text-secondary hover:text-primary transition-colors py-1 bg-transparent border-none">Categories</button>
             <button onClick={() => { setMobileMenuOpen(false); navigate('/deals'); }} className="text-left font-semibold text-text-secondary hover:text-primary transition-colors py-1 bg-transparent border-none">Deals</button>
+            <button onClick={() => { setMobileMenuOpen(false); navigate('/merchant'); }} className="text-left font-semibold text-text-secondary hover:text-primary transition-colors py-1 bg-transparent border-none">For Retailers</button>
           </div>
         )}
       </header>
