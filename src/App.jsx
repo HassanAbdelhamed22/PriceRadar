@@ -5,6 +5,9 @@ import SearchResults from './components/SearchResults';
 import ProductDetails from './components/ProductDetails';
 import CategoriesPage from './components/CategoriesPage';
 import DealsPage from './components/DealsPage';
+import MerchantLandingPage from './components/MerchantLandingPage';
+import MerchantLogin from './components/MerchantLogin';
+import MerchantOnboarding from './components/MerchantOnboarding';
 
 export default function App() {
   // Theme Manager State
@@ -34,6 +37,9 @@ export default function App() {
         <Route path="/product/:id" element={<ProductDetails theme={theme} toggleTheme={toggleTheme} />} />
         <Route path="/categories" element={<CategoriesPage theme={theme} toggleTheme={toggleTheme} />} />
         <Route path="/deals" element={<DealsPage theme={theme} toggleTheme={toggleTheme} />} />
+        <Route path="/merchant" element={<MerchantLandingPage theme={theme} toggleTheme={toggleTheme} />} />
+        <Route path="/merchant/login" element={<MerchantLogin theme={theme} toggleTheme={toggleTheme} />} />
+        <Route path="/merchant/onboarding" element={<MerchantOnboarding theme={theme} toggleTheme={toggleTheme} />} />
       </Routes>
     </Router>
   );
