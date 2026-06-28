@@ -8,6 +8,7 @@ import DealsPage from './components/DealsPage';
 import MerchantLandingPage from './components/MerchantLandingPage';
 import MerchantLogin from './components/MerchantLogin';
 import MerchantOnboarding from './components/MerchantOnboarding';
+import MerchantDashboard from './components/MerchantDashboard';
 
 export default function App() {
   // Theme Manager State
@@ -40,6 +41,7 @@ export default function App() {
         <Route path="/merchant" element={<MerchantLandingPage theme={theme} toggleTheme={toggleTheme} />} />
         <Route path="/merchant/login" element={<MerchantLogin theme={theme} toggleTheme={toggleTheme} />} />
         <Route path="/merchant/onboarding" element={<MerchantOnboarding theme={theme} toggleTheme={toggleTheme} />} />
+        <Route path="/merchant/dashboard" element={<MerchantDashboard theme={theme} toggleTheme={toggleTheme} />} />
       </Routes>
     </Router>
   );

@@ -350,26 +350,12 @@ export default function MerchantOnboarding({ theme, toggleTheme }) {
               </div>
             </div>
 
-            {/* Prototype Next Steps helper */}
-            <div className="bg-primary/5 border border-primary/20 p-4 rounded-2xl text-left flex gap-3">
-              <AlertCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-              <div className="space-y-0.5">
-                <span className="text-[10px] font-black uppercase text-primary tracking-widest block">Dashboard Prototype Note</span>
-                <p className="text-[10px] text-text-secondary leading-relaxed">
-                  You are viewing the login and connection prototype. The retailer dashboard UI is currently in development.
-                </p>
-              </div>
-            </div>
-
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <button 
-                onClick={() => {
-                  alert("Dashboard prototype complete! Directing back to the Retailer Home.");
-                  navigate('/merchant');
-                }}
+                onClick={() => navigate('/merchant/dashboard')}
                 className="flex-1 py-3.5 bg-linear-to-r from-orange-500 to-amber-500 text-white font-bold text-xs rounded-xl shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer flex justify-center items-center gap-1.5"
               >
-                <span>Go to Dashboard (Prototype)</span>
+                <span>Go to Dashboard</span>
               </button>
               <button 
                 onClick={() => navigate('/merchant')}
