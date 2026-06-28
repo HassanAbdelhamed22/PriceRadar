@@ -21,6 +21,8 @@ import {
   Flame,
   Star,
   ChevronRight,
+  Check,
+  Sparkles,
 } from 'lucide-react';
 
 import productsData from '../data/products.json';
@@ -134,6 +136,7 @@ export default function LandingPage({ theme, toggleTheme }) {
   const searchInputRef      = useRef(null);
   const searchWrapperRef    = useRef(null);
   const suggestionsRef      = useRef(null);
+  const shopperPlansRef     = useRef(null);
 
   // ── Search state ──────────────────────────────────────────
   const [searchQuery, setSearchQuery]           = useState('');
@@ -162,6 +165,14 @@ export default function LandingPage({ theme, toggleTheme }) {
   const [newsletterEmail, setNewsletterEmail]   = useState('');
   const [newsletterStatus, setNewsletterStatus] = useState('idle');
   const [mobileMenuOpen, setMobileMenuOpen]     = useState(false);
+
+  // ── Shopper plans state ──────────────────────────────────
+  const [showPlansModal, setShowPlansModal] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState('plus'); // 'plus', 'pro'
+  const [shopperEmail, setShopperEmail] = useState('');
+  const [shopperName, setShopperName] = useState('');
+  const [shopperWaitlistSubmitted, setShopperWaitlistSubmitted] = useState(false);
+  const [shopperWaitlistLoading, setShopperWaitlistLoading] = useState(false);
 
   /* Debounce search query */
   useEffect(() => {
@@ -318,6 +329,7 @@ export default function LandingPage({ theme, toggleTheme }) {
             <button onClick={() => searchInputRef.current?.focus()} className="text-sm font-medium text-text-secondary hover:text-text-primary hover:cursor-pointer transition-colors duration-200">Search</button>
             <button onClick={() => navigate('/categories')} className="text-sm font-medium text-text-secondary hover:text-text-primary hover:cursor-pointer transition-colors duration-200 bg-transparent border-none">Categories</button>
             <button onClick={() => navigate('/deals')} className="text-sm font-medium text-text-secondary hover:text-text-primary hover:cursor-pointer transition-colors duration-200 bg-transparent border-none">Deals</button>
+            <button onClick={() => navigate('/merchant')} className="text-sm font-medium text-text-secondary hover:text-text-primary hover:cursor-pointer transition-colors duration-200 bg-transparent border-none">For Retailers</button>
           </nav>
 
           <div className="flex items-center space-x-3.5">
@@ -330,7 +342,7 @@ export default function LandingPage({ theme, toggleTheme }) {
             <button onClick={toggleTheme} aria-label="Toggle theme" className="p-2 rounded-full hover:bg-surface text-text-secondary hover:text-text-primary transition-all duration-200">
               {theme === 'dark' ? <Sun className="w-4.5 h-4.5" /> : <Moon className="w-4.5 h-4.5" />}
             </button>
-            <button onClick={() => searchInputRef.current?.focus()} className="hidden sm:inline-flex py-2 px-5 bg-text-primary text-background hover:opacity-90 font-bold text-xs rounded-full shadow-sm transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]">
+            <button onClick={() => shopperPlansRef.current?.scrollIntoView({ behavior: 'smooth' })} className="hidden sm:inline-flex py-2 px-5 bg-text-primary text-background hover:opacity-90 font-bold text-xs rounded-full shadow-sm transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]">
               Try free
             </button>
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="Toggle navigation menu" className="md:hidden p-2 rounded-full hover:bg-surface text-text-secondary hover:text-text-primary transition-all duration-200">
@@ -343,6 +355,7 @@ export default function LandingPage({ theme, toggleTheme }) {
           <div className="md:hidden glass border-b absolute left-0 right-0 py-4 px-6 animate-slide-down shadow-xl flex flex-col space-y-4">
             <button onClick={() => { setMobileMenuOpen(false); navigate('/categories'); }} className="text-left text-base font-semibold text-text-secondary hover:text-primary transition-colors py-1 bg-transparent border-none cursor-pointer">Categories</button>
             <button onClick={() => { setMobileMenuOpen(false); navigate('/deals'); }} className="text-left text-base font-semibold text-text-secondary hover:text-primary transition-colors py-1 bg-transparent border-none cursor-pointer">Deals</button>
+            <button onClick={() => { setMobileMenuOpen(false); navigate('/merchant'); }} className="text-left text-base font-semibold text-text-secondary hover:text-primary transition-colors py-1 bg-transparent border-none cursor-pointer">For Retailers</button>
             <hr className="border-border my-2" />
             <a href="https://github.com/HassanAbdelhamed22/PriceRadar" target="_blank" rel="noreferrer" className="flex items-center space-x-2 py-2 text-text-secondary hover:text-primary">
               <GithubIcon className="w-5 h-5" />
@@ -675,6 +688,303 @@ export default function LandingPage({ theme, toggleTheme }) {
           </div>
         </div>
       </section>
+
+      {/* ── SHOPPER PLANS (B2C) ─────────────────────────────── */}
+      <section ref={shopperPlansRef} className="relative py-20 z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-border/40 bg-surface/10 rounded-3xl my-8">
+        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
+          <span className="text-xs font-bold uppercase tracking-widest text-primary">Shopper Plans</span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+            Plans for Every Type of Buyer
+          </h2>
+          <p className="text-sm sm:text-base text-text-secondary max-w-xl mx-auto leading-relaxed">
+            Searching, comparing, and viewing AI recommendations is 100% free with no login required. Unlock account subscriptions for tracking, alerts, and reports.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch max-w-5xl mx-auto">
+          
+          {/* Plan 1: Free (Guest) */}
+          <div className="bg-card glass border border-border rounded-3xl p-8 flex flex-col justify-between hover-lift shadow-sm text-left relative overflow-hidden transition-all duration-300">
+            <div>
+              <div className="space-y-2">
+                <div className="inline-block bg-success/15 text-success text-[10px] font-black py-0.5 px-2 rounded-full uppercase tracking-wider">
+                  Perfect for 90% of Users
+                </div>
+                <span className="text-xs font-bold uppercase tracking-wider text-muted block pt-1">Free (Guest)</span>
+                <p className="text-3xl font-black text-text-primary">
+                  EGP 0 <span className="text-xs font-semibold text-muted">/ month</span>
+                </p>
+                <p className="text-xs text-text-secondary pt-2">No login or account registration required to browse and compare stores.</p>
+              </div>
+
+              <hr className="border-border/60 my-6" />
+
+              <ul className="space-y-3.5 text-xs font-semibold text-text-secondary">
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Unlimited searches</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Compare prices across Egypt stores</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>AI Buy/Wait recommendations</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Basic price history charts</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Price predictions</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Product details & specifications</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Related products recommendations</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>View top deals discounts lists</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Browse electronic categories</span>
+                </li>
+              </ul>
+            </div>
+
+            <button 
+              onClick={() => searchInputRef.current?.focus()}
+              className="mt-8 w-full py-3 bg-surface hover:bg-border text-text-primary font-bold text-xs rounded-xl shadow-sm transition-all cursor-pointer text-center"
+            >
+              Start Searching
+            </button>
+          </div>
+
+          {/* Plan 2: Plus Shopper */}
+          <div className="bg-card glass border-2 border-primary rounded-3xl p-8 flex flex-col justify-between hover-lift shadow-lg text-left relative overflow-hidden transition-all duration-300">
+            <div className="absolute top-0 right-0 bg-primary text-white text-[9px] font-black py-1 px-4 rounded-bl-xl uppercase tracking-widest">
+              Power Shopper
+            </div>
+
+            <div>
+              <div className="space-y-2">
+                <span className="text-xs font-bold uppercase tracking-wider text-primary">Plus Plan</span>
+                <p className="text-3xl font-black text-text-primary">
+                  EGP 99 <span className="text-xs font-semibold text-muted">/ month</span>
+                </p>
+                <p className="text-xs text-text-secondary pt-2">For power shoppers wanting real-time drop alerts, custom tracking, and search history.</p>
+              </div>
+
+              <hr className="border-border/60 my-6" />
+
+              <ul className="space-y-3.5 text-xs font-semibold text-text-secondary">
+                <li className="flex items-center gap-2 text-text-primary font-bold">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Everything in Free</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Price Drop Alerts notifications</span>
+                </li>
+                <li className="flex items-center gap-2 text-primary font-bold">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Interactive charts & track analytics</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Personalized Wishlist folders</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Track prices of favorite products</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Daily AI shopping summaries</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Save recent searches histories</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Email & alerts updates</span>
+                </li>
+                <li className="flex items-center gap-2 text-muted">
+                  <Check className="w-3.5 h-3.5 text-success/50 shrink-0" />
+                  <span>Telegram/WhatsApp alerts (Coming soon)</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Early access to new AI features</span>
+                </li>
+              </ul>
+            </div>
+
+            <button 
+              onClick={() => { setSelectedPlan('plus'); setShowPlansModal(true); setShopperWaitlistSubmitted(false); setShopperName(''); setShopperEmail(''); }}
+              className="mt-8 w-full py-3 bg-linear-to-r from-orange-500 to-amber-500 text-white font-bold text-xs rounded-xl shadow-md hover:scale-[1.02] transition-all btn-gradient-shimmer cursor-pointer text-center animate-pulse"
+            >
+              Start Plus Trial
+            </button>
+          </div>
+
+          {/* Plan 3: Pro Shopper */}
+          <div className="bg-card glass border border-border rounded-3xl p-8 flex flex-col justify-between hover-lift shadow-sm text-left relative overflow-hidden transition-all duration-300">
+            <div>
+              <div className="space-y-2">
+                <span className="text-xs font-bold uppercase tracking-wider text-muted">Pro Shopper</span>
+                <p className="text-3xl font-black text-text-primary">
+                  EGP 199 <span className="text-xs font-semibold text-muted">/ month</span>
+                </p>
+                <p className="text-xs text-text-secondary pt-2">For pricing enthusiasts and businesses wanting historical trends and side-by-side tools.</p>
+              </div>
+
+              <hr className="border-border/60 my-6" />
+
+              <ul className="space-y-3.5 text-xs font-semibold text-text-secondary">
+                <li className="flex items-center gap-2 text-text-primary font-bold">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Everything in Plus</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Unlimited tracked products</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Advanced deep AI price predictions</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Historical prices (up to 1 full year)</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Market trend & price indices reports</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Export price catalog history (CSV/Excel)</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>Compare multiple items side by side</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Check className="w-3.5 h-3.5 text-success shrink-0" />
+                  <span>AI Shopping Assistant Chatbot</span>
+                </li>
+              </ul>
+            </div>
+
+            <button 
+              onClick={() => { setSelectedPlan('pro'); setShowPlansModal(true); setShopperWaitlistSubmitted(false); setShopperName(''); setShopperEmail(''); }}
+              className="mt-8 w-full py-3 bg-surface hover:bg-border text-text-primary font-bold text-xs rounded-xl shadow-sm transition-all cursor-pointer text-center"
+            >
+              Get Pro Shopper
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── SHOPPER PLANS MODAL ──────────────────────────────── */}
+      {showPlansModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div onClick={() => setShowPlansModal(false)} className="absolute inset-0 bg-background/70 backdrop-blur-md transition-opacity duration-300 z-0" />
+          
+          <div className="relative bg-card glass border border-border rounded-3xl w-full max-w-md p-6 sm:p-8 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto z-10">
+            <button 
+              onClick={() => setShowPlansModal(false)} 
+              className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-surface text-text-secondary hover:text-primary transition-colors cursor-pointer bg-transparent border-none"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {shopperWaitlistSubmitted ? (
+              <div className="text-center py-6 space-y-4">
+                <div className="w-12 h-12 rounded-full bg-success/20 text-success mx-auto flex items-center justify-center">
+                  <Check className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-extrabold text-text-primary">Welcome to the Club!</h3>
+                <p className="text-xs sm:text-sm text-text-secondary leading-relaxed max-w-sm mx-auto">
+                  Thank you for joining. We will notify you at <strong className="text-text-primary">{shopperEmail}</strong> as soon as the {selectedPlan === 'plus' ? 'Plus Plan' : 'Pro Shopper Plan'} features are rolled out to your email account.
+                </p>
+                <button 
+                  onClick={() => setShowPlansModal(false)}
+                  className="mt-4 px-6 py-2.5 bg-primary text-white text-xs font-bold rounded-xl shadow-md hover:scale-[1.02] transition-transform cursor-pointer"
+                >
+                  Close
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-5 text-left">
+                <div className="space-y-1">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-3">
+                    <Sparkles className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-extrabold text-text-primary">
+                    Join {selectedPlan === 'plus' ? 'Plus Plan' : 'Pro Shopper'} Waitlist
+                  </h3>
+                  <p className="text-xs text-text-secondary leading-relaxed">
+                    Premium shopper accounts are currently in closed beta testing. Be among the first to gain access.
+                  </p>
+                </div>
+
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                  if (!shopperName || !shopperEmail) return;
+                  setShopperWaitlistLoading(true);
+                  setTimeout(() => {
+                    setShopperWaitlistLoading(false);
+                    setShopperWaitlistSubmitted(true);
+                  }, 1000);
+                }} className="space-y-4 pt-1">
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-extrabold uppercase text-muted tracking-wider">Your Full Name</label>
+                    <input 
+                      type="text" 
+                      required 
+                      placeholder="e.g. Hassan Ali"
+                      value={shopperName}
+                      onChange={e => setShopperName(e.target.value)}
+                      className="w-full py-2.5 px-4 bg-surface border border-border text-text-primary placeholder-muted rounded-xl text-xs outline-none focus:border-primary"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-extrabold uppercase text-muted tracking-wider">Your Email Address</label>
+                    <input 
+                      type="email" 
+                      required 
+                      placeholder="name@example.com"
+                      value={shopperEmail}
+                      onChange={e => setShopperEmail(e.target.value)}
+                      className="w-full py-2.5 px-4 bg-surface border border-border text-text-primary placeholder-muted rounded-xl text-xs outline-none focus:border-primary"
+                    />
+                  </div>
+
+                  <button 
+                    type="submit" 
+                    disabled={shopperWaitlistLoading}
+                    className="w-full mt-2 py-3 bg-linear-to-r from-orange-500 to-amber-500 text-white font-bold text-xs rounded-xl shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 btn-gradient-shimmer cursor-pointer flex justify-center items-center"
+                  >
+                    {shopperWaitlistLoading ? 'Submitting...' : 'Register for Early Access'}
+                  </button>
+                </form>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* ── FOOTER ──────────────────────────────────────────── */}
       <footer className="bg-footer border-t border-border/80 pt-20 pb-10 relative z-10">
