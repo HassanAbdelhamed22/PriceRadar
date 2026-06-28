@@ -22,8 +22,8 @@ const INITIAL_PRODUCTS = [
 export default function MerchantDashboard({ theme, toggleTheme }) {
   const navigate = useNavigate();
 
-  // Active View Tab State - Starts directly with the AI Copilot
-  const [activeTab, setActiveTab] = useState('copilot'); // 'copilot', 'dashboard', 'analytics', 'billing'
+  // Active View Tab State - Starts directly with the Dashboard
+  const [activeTab, setActiveTab] = useState('dashboard'); // 'copilot', 'dashboard', 'analytics', 'billing'
 
   // Connected Website State
   const [websiteStatus, setWebsiteStatus] = useState('Connected'); 
@@ -364,8 +364,8 @@ export default function MerchantDashboard({ theme, toggleTheme }) {
           <nav className="space-y-1 text-left">
             <span className="text-[9px] font-black uppercase text-muted tracking-widest pl-3 block mb-2">Workspace</span>
             {[
-              { id: 'copilot', label: 'AI Copilot 🧠', icon: Sparkles },
               { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
+              { id: 'copilot', label: 'AI Copilot 🧠', icon: Sparkles },
               { id: 'analytics', label: 'AI Analytics', icon: Layers },
               { id: 'billing', label: 'Subscriptions', icon: DollarSign },
               { id: 'feed', label: 'Products Feed', icon: Package, disabled: true },
@@ -823,7 +823,7 @@ export default function MerchantDashboard({ theme, toggleTheme }) {
                         <Globe className="w-6 h-6" />
                       </div>
                       <div>
-                        <h4 className="font-extrabold text-base text-text-primary">rayashop.com</h4>
+                        <h4 className="font-extrabold text-base text-text-primary">selectegypt.com</h4>
                         <p className="text-[11px] text-text-secondary mt-0.5">Primary business categories: Phones & Laptops. Scrapers active.</p>
                       </div>
                     </div>

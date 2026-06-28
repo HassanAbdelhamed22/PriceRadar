@@ -5,7 +5,8 @@ import {
   ChevronDown, ChevronRight, Clock, Flame, ArrowRight, ShoppingBag, SlidersHorizontal,
   CheckCircle2, Check, Plus, Scale, Radar, Sun, Moon, Menu, Zap,
   TrendingUp as TrendUp, Target, BarChart3, ShoppingCart, Award,
-  DollarSign, Percent
+  DollarSign, Percent,
+  Sparkles
 } from 'lucide-react';
 
 import AISearchWorkflow from './AISearchWorkflow';
@@ -69,10 +70,15 @@ const MOCK_PRODUCTS = productsData.map(product => {
       else if (n.includes('jumia')) logo = 'JUM';
       else if (n.includes('b.tech')) logo = 'BTC';
       else if (n.includes('raya')) logo = 'RAY';
+      else if (n.includes('select')) logo = 'SEL';
       return { name: s.name, price: s.price, logo, cheapest: cheapest && s.name === cheapest.name };
     }),
     priceHistory: product.priceHistory,
     recommendation: product.recommendation,
+    topSearchPlacement: product.topSearchPlacement,
+    homepageDealsSpotlight: product.homepageDealsSpotlight,
+    recommendedPlacement: product.recommendedPlacement,
+    trendingCarousel: product.trendingCarousel,
   };
 });
 
@@ -279,6 +285,10 @@ export default function SearchResults({ theme, toggleTheme }) {
       const pr = p.lowestPrice <= activeFilters.maxPrice;
       return q && b && c && s && pr;
     }).sort((a, b) => {
+      // Float sponsored search placement products to the top
+      if (a.topSearchPlacement && !b.topSearchPlacement) return -1;
+      if (!a.topSearchPlacement && b.topSearchPlacement) return 1;
+
       if (activeFilters.sort === 'Price: Low to High')  return a.lowestPrice   - b.lowestPrice;
       if (activeFilters.sort === 'Price: High to Low') return b.lowestPrice   - a.lowestPrice;
       if (activeFilters.sort === 'Biggest Discount')   return b.priceDifference - a.priceDifference;
@@ -768,11 +778,19 @@ export default function SearchResults({ theme, toggleTheme }) {
                   style={{ animationDelay: `${index * 80}ms` }}
                 >
                   <div
-                    className="bg-card glass border border-border hover:border-primary/30 rounded-2xl overflow-hidden flex flex-col h-full hover-tilt"
+                    className={`bg-card glass border hover:border-primary/30 rounded-2xl overflow-hidden flex flex-col h-full hover-tilt relative ${
+                      product.topSearchPlacement ? 'border-primary bg-primary/5 ring-1 ring-primary/20 shadow-md' : 'border-border'
+                    }`}
                   >
 
                     {/* Product image */}
                     <div className="h-44 relative overflow-hidden bg-zinc-950/40 group">
+                      {product.topSearchPlacement && (
+                        <div className="absolute top-3 left-3 bg-linear-to-r from-orange-500 to-amber-500 text-white text-[9px] font-black uppercase tracking-widest px-2.5 py-1.5 rounded-md z-10 flex items-center gap-1 shadow-md">
+                          <Sparkles className="w-3 h-3 text-white fill-white" />
+                          <span>Featured Listing</span>
+                        </div>
+                      )}
                       <img
                         src={product.image}
                         alt={product.title}
@@ -784,7 +802,7 @@ export default function SearchResults({ theme, toggleTheme }) {
                         <Star className="w-3.5 h-3.5 text-warning fill-warning" />
                         <span>{product.rating}</span>
                       </div>
-                      <div className="absolute top-3 left-3 bg-black/60 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded-md">
+                      <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-md">
                         {product.category}
                       </div>
                     </div>

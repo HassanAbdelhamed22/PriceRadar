@@ -8,7 +8,15 @@
     "rating": 4.3,
     "reviews": 779,
     "description": "Apple MacBook Air M4 in the Standard configuration.",
+    "topSearchPlacement": true,
     "stores": [
+      {
+        "name": "Select Egypt",
+        "price": 38700,
+        "url": "https://selectegypt.com",
+        "availability": true,
+        "merchantAdded": true
+      },
       {
         "name": "Amazon Egypt",
         "price": 38678,
@@ -93,7 +101,15 @@
     "rating": 4.5,
     "reviews": 2025,
     "description": "Apple MacBook Air M4 in the 2026 Edition configuration.",
+    "homepageDealsSpotlight": true,
     "stores": [
+      {
+        "name": "Select Egypt",
+        "price": 68000,
+        "url": "https://selectegypt.com",
+        "availability": true,
+        "merchantAdded": true
+      },
       {
         "name": "Amazon Egypt",
         "price": 68581,
@@ -178,7 +194,15 @@
     "rating": 4.1,
     "reviews": 405,
     "description": "Apple MacBook Air M4 in the Pro configuration.",
+    "recommendedPlacement": true,
     "stores": [
+      {
+        "name": "Select Egypt",
+        "price": 59900,
+        "url": "https://selectegypt.com",
+        "availability": true,
+        "merchantAdded": true
+      },
       {
         "name": "Amazon Egypt",
         "price": 60369,
@@ -263,7 +287,15 @@
     "rating": 4.2,
     "reviews": 4364,
     "description": "Apple MacBook Air M4 in the Plus configuration.",
+    "trendingCarousel": true,
     "stores": [
+      {
+        "name": "Select Egypt",
+        "price": 79900,
+        "url": "https://selectegypt.com",
+        "availability": true,
+        "merchantAdded": true
+      },
       {
         "name": "Amazon Egypt",
         "price": 81056,

@@ -67,6 +67,7 @@ const MOCK_DEALS = productsData.map(product => {
       else if (sName.includes('jumia')) storeLogo = 'JUM';
       else if (sName.includes('b.tech')) storeLogo = 'BTC';
       else if (sName.includes('raya')) storeLogo = 'RAY';
+      else if (sName.includes('select')) storeLogo = 'SEL';
       return { name: s.name, price: s.price, logo: storeLogo, cheapest: cheapest && s.name === cheapest.name };
     }),
     aiVerdict,
@@ -75,9 +76,15 @@ const MOCK_DEALS = productsData.map(product => {
     reviews: product.reviews,
     image: product.image,
     cheapestStoreName: cheapest?.name || '',
+    homepageDealsSpotlight: product.homepageDealsSpotlight,
+    trendingCarousel: product.trendingCarousel,
   };
 })
-.sort((a, b) => b.savings - a.savings)
+.sort((a, b) => {
+  if (a.homepageDealsSpotlight && !b.homepageDealsSpotlight) return -1;
+  if (!a.homepageDealsSpotlight && b.homepageDealsSpotlight) return 1;
+  return b.savings - a.savings;
+})
 .slice(0, 6);
 
 const CATEGORIES = [
@@ -631,15 +638,33 @@ export default function LandingPage({ theme, toggleTheme }) {
             {filteredDeals.map(deal => {
               const sortedStores = [...deal.stores].sort((a, b) => a.price - b.price);
               return (
-                <div key={deal.id} className="bg-card border border-border rounded-2xl overflow-hidden hover-tilt hover-lift shadow-sm flex flex-col">
+                <div 
+                  key={deal.id} 
+                  className={`bg-card border rounded-2xl overflow-hidden hover-tilt hover-lift shadow-sm flex flex-col relative ${
+                    deal.homepageDealsSpotlight ? 'border-primary/50 bg-primary/5 ring-1 ring-primary/10 shadow-md' : 'border-border'
+                  }`}
+                >
                   <div className="p-6 pb-4 border-b border-border/70 relative">
+                    {deal.homepageDealsSpotlight && (
+                      <div className="absolute top-2 right-6 bg-linear-to-r from-orange-500 to-amber-500 text-white text-[8px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full z-10 flex items-center gap-1 shadow-sm">
+                        <Sparkles className="w-2.5 h-2.5" />
+                        <span>Featured Deal</span>
+                      </div>
+                    )}
                     <div className="flex justify-between items-start mb-4">
                       <div className="w-12 h-12 rounded-xl bg-surface border border-border flex items-center justify-center text-primary shadow-inner">
                         {renderCategoryIcon(deal.category, 'w-6 h-6')}
                       </div>
-                      <span className="bg-success/10 text-success border border-success/20 text-xs font-bold px-2.5 py-0.5 rounded-full">
-                        Save EGP {deal.savings.toLocaleString()}
-                      </span>
+                      
+                      {!deal.homepageDealsSpotlight ? (
+                        <span className="bg-success/10 text-success border border-success/20 text-xs font-bold px-2.5 py-0.5 rounded-full">
+                          Save EGP {deal.savings.toLocaleString()}
+                        </span>
+                      ) : (
+                        <span className="bg-success/20 text-success border border-success/35 text-xs font-black px-2.5 py-0.5 rounded-full mt-4">
+                          Save EGP {deal.savings.toLocaleString()}
+                        </span>
+                      )}
                     </div>
 
                     <h3 className="font-bold text-base text-text-primary line-clamp-2 h-12 leading-snug">{deal.title}</h3>
@@ -686,6 +711,77 @@ export default function LandingPage({ theme, toggleTheme }) {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* ── TRENDING PRODUCTS CAROUSEL (MEMBER/ADS SPONSORED) ── */}
+      <section className="relative py-16 z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-border/40">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 text-left">
+          <div className="space-y-2">
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-primary">
+              <Sparkles className="w-4 h-4 text-primary animate-pulse" />
+              <span>Trending Products</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+              Trending Products Carousel
+            </h2>
+            <p className="text-sm text-text-secondary max-w-xl leading-relaxed">
+              Highly searched items matching merchant-featured visibility boosts and top Cairo pricing comparisons.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex overflow-x-auto gap-6 pb-6 pt-2 scrollbar-thin snap-x">
+          {productsData
+            .filter(p => p.trendingCarousel)
+            .map(product => {
+              const sortedStores = [...product.stores].sort((a, b) => a.price - b.price);
+              const cheapest = sortedStores[0];
+              const lowestPrice = cheapest ? cheapest.price : 0;
+              
+              return (
+                <div 
+                  key={product.id} 
+                  className="w-72 shrink-0 bg-card border border-primary/30 ring-1 ring-primary/10 rounded-2xl overflow-hidden hover-tilt hover-lift shadow-md flex flex-col justify-between snap-start"
+                >
+                  <div className="h-40 relative bg-zinc-950/40 overflow-hidden">
+                    <div className="absolute top-3 left-3 bg-linear-to-r from-orange-500 to-amber-500 text-white text-[8px] font-black uppercase tracking-widest px-2.5 py-1 rounded-md z-10 flex items-center gap-1 shadow-md">
+                      <Sparkles className="w-2.5 h-2.5" />
+                      <span>Trending Carousel</span>
+                    </div>
+                    <img 
+                      src={product.image} 
+                      alt={product.name}
+                      className="w-full h-full object-cover" 
+                    />
+                    <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur text-white text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-md">
+                      {product.category}
+                    </div>
+                  </div>
+
+                  <div className="p-5 flex-1 flex flex-col justify-between text-left">
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-bold text-muted uppercase tracking-wider block">{product.brand}</span>
+                      <h3 className="font-extrabold text-sm text-text-primary line-clamp-2 h-10 leading-snug">{product.name}</h3>
+                    </div>
+
+                    <div className="mt-4 pt-4 border-t border-border/50 flex items-end justify-between">
+                      <div>
+                        <span className="text-[9px] font-bold text-muted uppercase block">Best Price</span>
+                        <span className="text-base font-black text-success">EGP {lowestPrice.toLocaleString()}</span>
+                      </div>
+                      
+                      <button
+                        onClick={() => navigate(`/product/${product.id}`)}
+                        className="py-1.5 px-3.5 bg-primary text-white hover:bg-primary-hover font-bold text-[10px] rounded-lg shadow-sm transition-all"
+                      >
+                        Compare
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
         </div>
       </section>
 

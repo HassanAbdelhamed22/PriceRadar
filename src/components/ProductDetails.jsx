@@ -457,6 +457,7 @@ export default function ProductDetails({ theme, toggleTheme }) {
     else if (sName.includes('jumia')) storeLogo = 'JUM';
     else if (sName.includes('b.tech')) storeLogo = 'BTC';
     else if (sName.includes('raya')) storeLogo = 'RAY';
+    else if (sName.includes('select')) storeLogo = 'SEL';
     return {
       name: s.name,
       price: s.price,
@@ -507,6 +508,11 @@ export default function ProductDetails({ theme, toggleTheme }) {
   
   const relatedProducts = productsData
     .filter(p => p.category === product.category && p.id !== product.id)
+    .sort((a, b) => {
+      if (a.recommendedPlacement && !b.recommendedPlacement) return -1;
+      if (!a.recommendedPlacement && b.recommendedPlacement) return 1;
+      return 0;
+    })
     .slice(0, 3)
     .map(p => {
       const pSortedStores = [...p.stores].sort((a, b) => a.price - b.price);
@@ -518,7 +524,8 @@ export default function ProductDetails({ theme, toggleTheme }) {
         brand: p.brand,
         price: pLowest,
         save: pHighest - pLowest,
-        image: p.image
+        image: p.image,
+        recommendedPlacement: p.recommendedPlacement
       };
     });
     
@@ -1221,9 +1228,17 @@ export default function ProductDetails({ theme, toggleTheme }) {
               <div 
                 key={p.id} 
                 onClick={() => navigate(`/product/${p.id}`)}
-                className="bg-card border border-border rounded-2xl overflow-hidden hover-lift shadow-sm flex flex-col cursor-pointer transition-all hover:border-primary/50"
+                className={`bg-card border rounded-2xl overflow-hidden hover-lift shadow-sm flex flex-col cursor-pointer transition-all relative ${
+                  p.recommendedPlacement ? 'border-primary/50 bg-primary/5 ring-1 ring-primary/10 shadow-md' : 'border-border hover:border-primary/50'
+                }`}
               >
-                <div className="h-40 bg-zinc-950/40 overflow-hidden">
+                <div className="h-40 bg-zinc-950/40 overflow-hidden relative">
+                  {p.recommendedPlacement && (
+                    <div className="absolute top-3 left-3 bg-linear-to-r from-orange-500 to-amber-500 text-white text-[8px] font-black uppercase tracking-widest px-2.5 py-1 rounded-md z-10 flex items-center gap-1 shadow-sm">
+                      <Sparkles className="w-2.5 h-2.5" />
+                      <span>Recommended Ad</span>
+                    </div>
+                  )}
                   <img src={p.image} alt={p.title} loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
                 </div>
                 <div className="p-4 flex-1 flex flex-col justify-between">
