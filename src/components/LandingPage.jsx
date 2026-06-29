@@ -911,7 +911,7 @@ export default function LandingPage({ theme, toggleTheme }) {
               <div className="space-y-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-primary">Plus Plan</span>
                 <p className="text-3xl font-black text-text-primary">
-                  EGP 99 <span className="text-xs font-semibold text-muted">/ month</span>
+                  EGP 49 <span className="text-xs font-semibold text-muted">/ month</span>
                 </p>
                 <p className="text-xs text-text-secondary pt-2">For power shoppers wanting real-time drop alerts, custom tracking, and search history.</p>
               </div>
@@ -971,7 +971,7 @@ export default function LandingPage({ theme, toggleTheme }) {
           </div>
 
           {/* Plan 3: Pro Shopper */}
-          <div className="bg-card glass border border-border rounded-3xl p-8 flex flex-col justify-between hover-lift shadow-sm text-left relative overflow-hidden transition-all duration-300">
+          {/* <div className="bg-card glass border border-border rounded-3xl p-8 flex flex-col justify-between hover-lift shadow-sm text-left relative overflow-hidden transition-all duration-300">
             <div>
               <div className="space-y-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-muted">Pro Shopper</span>
@@ -1025,7 +1025,7 @@ export default function LandingPage({ theme, toggleTheme }) {
             >
               Get Pro Shopper
             </button>
-          </div>
+          </div> */}
 
         </div>
       </section>

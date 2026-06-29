@@ -759,7 +759,7 @@ export default function MerchantLandingPage({ theme, toggleTheme }) {
               <div className="space-y-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-primary">Pro Merchant ⭐</span>
                 <p className="text-3xl font-black text-text-primary">
-                  EGP 999 <span className="text-xs font-semibold text-muted">/ month</span>
+                  EGP 750 <span className="text-xs font-semibold text-muted">/ month</span>
                 </p>
                 <p className="text-xs text-text-secondary pt-2">Our highlighted plan. Built for growing professional sellers.</p>
               </div>
@@ -847,7 +847,7 @@ export default function MerchantLandingPage({ theme, toggleTheme }) {
               <div className="space-y-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-muted">Business</span>
                 <p className="text-3xl font-black text-text-primary">
-                  EGP 2,999 <span className="text-xs font-semibold text-muted">/ month</span>
+                  EGP 1,500 <span className="text-xs font-semibold text-muted">/ month</span>
                 </p>
                 <p className="text-xs text-text-secondary pt-2">For large retailers and multi-brand operators needing full sync.</p>
               </div>
