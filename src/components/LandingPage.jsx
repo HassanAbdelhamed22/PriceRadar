@@ -835,7 +835,7 @@ export default function LandingPage({ theme, toggleTheme }) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch max-w-5xl mx-auto">
           
           {/* Plan 1: Free (Guest) */}
           <div className="bg-card glass border border-border rounded-3xl p-8 flex flex-col justify-between hover-lift shadow-sm text-left relative overflow-hidden transition-all duration-300">
